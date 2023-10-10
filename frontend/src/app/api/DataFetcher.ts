@@ -1,6 +1,6 @@
 ﻿import {Contact} from "../types";
 
-const API_URL = 'http://192.168.0.87:3001';
+const API_URL = 'http://localhost:3001';
 
 
 
@@ -41,7 +41,7 @@ export async function updateContact(contactId: number, contactData: any) {
   formData.append("picture", contactData.picture);
 
   const response = await fetch(`${API_URL}/contacts/${contactId}`, {
-    method: "PATCH", // Use the PATCH method for updating
+    method: "PATCH",
     body: formData,
   });
 

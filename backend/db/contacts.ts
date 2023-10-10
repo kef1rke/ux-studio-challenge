@@ -60,17 +60,14 @@ export const getContacts = async (): Promise<Contact[]> => {
 
 export const deleteContact = async (id: number): Promise<void> => {
   try {
-    // Get the contact to retrieve the profile picture filename
     const contact = await knex('users').where({ id }).first();
 
     if (contact) {
-      // Delete the profile picture file if it exists
       if (contact.picture) {
         const filePath = path.join(__dirname, '..', contact.picture);
         fs.unlinkSync(filePath);
       }
 
-      // Delete the contact from the database
       await knex('users').where({ id }).del();
       console.log('Contact deleted successfully');
     } else {
@@ -84,8 +81,6 @@ export const deleteContact = async (id: number): Promise<void> => {
 
 export const updateContact = async (contactId, updatedData) => {
   try {
-    // Perform the update operation based on the contactId and updatedData
-    // console.log('updatedData', updatedData)
     const result = await knex('users')
       .where({ id: contactId })
       .update(updatedData);

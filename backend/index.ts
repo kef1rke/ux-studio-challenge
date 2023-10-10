@@ -54,32 +54,11 @@ app.get('/contacts', async (req, res) => {
 
 app.patch('/contacts/:id', upload.single('picture'), async (req, res) => {
   const contactId = req.params.id;
-  // console.log(req.body)
-  // if (req.body.picture) {
-  //   const urlParts = req.body.picture.split('/')
-  //   const fileName = urlParts[urlParts.length - 1];
-
-  //   const filePath = path.join('/uploads', fileName);
-
-  //   console.log('filePath', filePath)
-
-  //   fs.promises.access(filePath, fs.constants.F_OK)
-  //   .then(() => {
-  //     // File exists in the uploads directory
-  //     console.log(`File ${fileName} exists in the uploads directory.`);
-  //   })
-  //   .catch(() => {
-  //     // File does not exist in the uploads directory
-  //     console.error(`File ${fileName} does not exist in the uploads directory.`);
-  //   });
-  // }
-
 
   const updatedContactData = {
     ...req.body,
     picture: req.file ? `/uploads/${req.file.filename}` : req.body.picture ? `/uploads/${req.body.picture?.split('/')[req.body.picture?.split('/').length - 1]}` : null,
   };
-
 
   try {
     const result = await updateContact(contactId, updatedContactData);

@@ -36,8 +36,6 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   };
 
   const handleFavouriteClick = () => {
-    // Handle the "Delete" button click
-    // ...
     closeDropdown();
   };
 

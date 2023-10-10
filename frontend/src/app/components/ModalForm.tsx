@@ -1,7 +1,7 @@
 ﻿// Modal.tsx
 
 import React, { useState, FormEvent } from "react";
-import styles from "./components.module.css"; // You can define your modal styles in a CSS module
+import styles from "./components.module.css";
 import LabelButton from "./LabelButton";
 import InputField from "./InputField";
 import ProfileSelector from "./ProfileSelector";
