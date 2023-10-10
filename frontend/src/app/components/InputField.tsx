@@ -1,14 +1,15 @@
-﻿import React, { ReactNode, useState } from "react";
-import Link from "next/link";
+﻿import React from "react";
 import styles from "./components.module.css";
 
 interface CustomInputProps {
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type: string;
   placeholder: string;
   id: string;
   label: string;
   name: string;
-  defaultValue?: string;
+  defaultValue?: string | number; // Allow both string and number
+  value?: string | number;
 }
 
 const InputField: React.FC<CustomInputProps> = ({
@@ -17,12 +18,14 @@ const InputField: React.FC<CustomInputProps> = ({
   placeholder,
   label,
   name,
-  defaultValue,
+  value: inputValue,
+  onChange,
 }) => {
-  const [value, setValue] = useState(defaultValue || "");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    if (onChange) {
+      onChange(event);
+    }
   };
 
   return (
@@ -34,7 +37,7 @@ const InputField: React.FC<CustomInputProps> = ({
         type={type}
         placeholder={placeholder}
         name={name}
-        value={value}
+        value={inputValue}
         onChange={handleChange}
       />
     </div>

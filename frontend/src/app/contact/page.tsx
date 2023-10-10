@@ -57,6 +57,7 @@ const Contact = () => {
                 <ContactListItem
                   loadContact={loadContact}
                   contactData={contact}
+                  key={contact.id}
                 />
               ))
             ) : (

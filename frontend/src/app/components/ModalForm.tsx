@@ -1,6 +1,4 @@
-﻿// Modal.tsx
-
-import React, { useState, FormEvent } from "react";
+﻿import React, { useState, FormEvent } from "react";
 import styles from "./components.module.css";
 import LabelButton from "./LabelButton";
 import InputField from "./InputField";
@@ -30,31 +28,47 @@ const ModalForm: React.FC<ModalProps> = ({
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  const getFieldValue = (field: string, defaultValue: string) => {
+    const input = profileData ? profileData[field as keyof Contact] : null;
+    return input !== null && input !== undefined ? input : defaultValue;
+  };
+
+  const [formData, setFormData] = useState({
+    name: getFieldValue("name", ""),
+    email: getFieldValue("email", ""),
+    phone: getFieldValue("phone", ""),
+    picture: profileData?.picture ? profileData.picture : selectedFile ? URL.createObjectURL(selectedFile) : null ,
+  });
+
+  const handleDelete = () => {
+    // const { name, value } = event.target;
+    setSelectedFile(null);
+    setFormData(name => ({ ...name, picture: "" }));
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const form = e.currentTarget as HTMLFormElement;
 
-    const nameInput = form.querySelector<HTMLInputElement>("#name")?.value
-      ? form.querySelector<HTMLInputElement>("#name")?.value
-      : profileData?.name;
-    const emailInput = form.querySelector<HTMLInputElement>("#email")?.value
-      ? form.querySelector<HTMLInputElement>("#email")?.value
-      : profileData?.email;
-    const phoneInput = form.querySelector<HTMLInputElement>("#phone")?.value
-      ? form.querySelector<HTMLInputElement>("#phone")?.value
-      : profileData?.phone;
-    const pictureInput = selectedFile ? selectedFile : profileData?.picture;
+    const contactData: any = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      picture: selectedFile || formData.picture,
+    };
+
     const contactId = profileData?.id;
 
-    if (nameInput && emailInput && phoneInput) {
-      const contactData: any = {
-        name: nameInput == "" ? null : nameInput,
-        email: emailInput == "" ? null : emailInput,
-        phone: phoneInput == "" ? null : phoneInput,
-        picture: pictureInput == null ? null : pictureInput,
-      };
-      if (type == "add") {
+    if (contactData.name && contactData.email && contactData.phone) {
+      if (type === "add") {
         try {
           const addedContact = await addContact(contactData);
 
@@ -65,7 +79,7 @@ const ModalForm: React.FC<ModalProps> = ({
           console.error("Error adding contact:", error);
         }
       }
-      if (type == "edit" && contactId) {
+      if (type === "edit" && contactId) {
         try {
           const updatedContact = await updateContact(contactId, contactData);
           form.reset();
@@ -84,13 +98,9 @@ const ModalForm: React.FC<ModalProps> = ({
 
         <form onSubmit={handleSubmit}>
           <ProfileSelector
-            onFileUpload={(file) => {
-              setSelectedFile(file);
-            }}
-            type={type}
-            label={type == "add" ? "Add picture" : "Change picture"}
-            icon={type == "add" ? svgs.add : svgs.edit}
-            defaultValue={type == "edit" ? profileData?.picture : ""}
+            onFileUpload={(file) => setSelectedFile(file)}
+            defaultValue={formData.picture}
+            onDelete={handleDelete}
           />
           <InputField
             label="Name"
@@ -98,7 +108,8 @@ const ModalForm: React.FC<ModalProps> = ({
             type="text"
             placeholder="Jamie Wright"
             name="name"
-            defaultValue={type == "edit" ? profileData?.name : ""}
+            value={formData.name}
+            onChange={handleInputChange}
           />
           <InputField
             label="Phone number"
@@ -106,7 +117,8 @@ const ModalForm: React.FC<ModalProps> = ({
             type="text"
             placeholder="+36306543214"
             name="phone"
-            defaultValue={type == "edit" ? profileData?.phone : ""}
+            value={formData.phone}
+            onChange={handleInputChange}
           />
           <InputField
             label="Email address"
@@ -114,7 +126,8 @@ const ModalForm: React.FC<ModalProps> = ({
             type="email"
             placeholder="jamie.wright@mail.com"
             name="email"
-            defaultValue={type == "edit" ? profileData?.email : ""}
+            value={formData.email}
+            onChange={handleInputChange}
           />
           <div className={styles.buttonHolder}>
             <LabelButton
@@ -130,5 +143,6 @@ const ModalForm: React.FC<ModalProps> = ({
     </div>
   );
 };
+
 
 export default ModalForm;

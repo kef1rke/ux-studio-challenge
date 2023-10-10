@@ -1,61 +1,53 @@
-﻿import LabelButton from "./LabelButton";
+﻿import React, { useRef, useState, ReactElement } from "react";
+import LabelButton from "./LabelButton";
 import styles from "./components.module.css";
-import { useRef, useState, ReactElement } from "react";
 import { svgs } from "./svgs";
 
 interface ProfileSelectorProps {
-  onFileUpload: (file: File | null) => void; // Updated the type of onFileUpload to accept null
-  label: string;
-  icon: ReactElement;
-  type: "add" | "edit";
-  defaultValue?: string;
+  onFileUpload: (file: File | null) => void;
+  onDelete: () => void;
+  defaultValue?: string | null;
 }
 
 const ProfileSelector: React.FC<ProfileSelectorProps> = ({
   onFileUpload,
-  label,
-  icon,
-  type,
+  onDelete,
   defaultValue,
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
-
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [src, setSrc] = useState<string>(selectedFile ? URL.createObjectURL(selectedFile) : (defaultValue ? defaultValue : "/profiledefault.png"));
 
-  const handleFileChange = (
-    event: React.ChangeEvent<HTMLInputElement> | null
-  ) => {
-    const file = event?.target.files?.[0];
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file);
       onFileUpload(file);
+      setSrc(URL.createObjectURL(file))
     }
+  };
+
+  const handleDelete = () => {
+    setSelectedFile(null);
+    onFileUpload(null);
+    onDelete();
+    setSrc("/profiledefault.png")
   };
 
   return (
     <div className={styles.profileSelectorHolder}>
+      
       <img
+        key={selectedFile ? 'selected' : 'default'}
         className={styles.picture}
-        src={
-          type === "add"
-            ? selectedFile
-              ? URL.createObjectURL(selectedFile)
-              : "/profiledefault.png"
-            : selectedFile
-            ? URL.createObjectURL(selectedFile)
-            : defaultValue
-        }
+        src={src}
         alt="current_profile_picture"
       />
 
       <LabelButton
-        onClick={handleClick}
-        icon={icon}
-        label={label}
+        onClick={() => inputRef.current?.click()}
+        icon={selectedFile || defaultValue ? svgs.edit : svgs.add}
+        label={selectedFile || defaultValue ? "Change picture" : "Add picture"}
         type="button"
         customClass={styles.buttonWithMargin}
       >
@@ -68,13 +60,17 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
           name="fileInput"
         />
       </LabelButton>
-      {type === "edit" ? (
+
+      {(selectedFile || defaultValue) ? (
+        <>
+        <>{console.log(selectedFile, defaultValue)}</>
         <LabelButton
           type="button"
           shape="justIcon"
           icon={svgs.delete}
-        ></LabelButton>
-      ) : null}
+          onClick={handleDelete}
+        ></LabelButton></>
+      ): null}
     </div>
   );
 };
