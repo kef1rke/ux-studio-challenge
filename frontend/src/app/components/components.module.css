@@ -1,0 +1,608 @@
+﻿.card {
+  padding: 1rem 1.2rem;
+  border-radius: var(--border-radius);
+  background: var(--grey-60);
+  /* background: rgba(var(--card-rgb), 0);
+  border: 1px solid rgba(var(--card-border-rgb), 0);
+  transition: background 200ms, border 200ms; */
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    background: var(--grey-50);
+  }
+
+}
+
+/* LabelButton style */
+
+.primaryButton,
+.secondaryButton,
+.justIconButton,
+.shapelessButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--labelButton-height);
+  /* margin-left: 16px */
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: 8px 16px 8px 12px;
+}
+
+.primaryButton {
+  border-radius: 1000px;
+}
+
+.secondaryButton,
+.justIconButton {
+  border-radius: var(--border-radius);
+}
+
+.justIconButton {
+  padding: 8px;
+  width: 40px;
+}
+
+.ghostButton {
+  background-color: transparent;
+}
+
+.ghostButton:hover {
+  background-color: var(--grey-90);
+}
+
+.ghostButton:active,
+.ghostButton:focus {
+  background-color: var(--grey-80);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.label {
+  font-size: 14px;
+    white-space: nowrap;
+}
+
+.separator {
+  width: 4px
+}
+
+.buttonWithMargin {
+  margin-right: 8px;
+}
+
+@media (max-width: 1024px) {
+  .primaryButton,
+    .secondaryButton,
+    .justIconButton,
+    .shapelessButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--labelButton-height-medium);
+      /* margin-left: 16px */
+    }
+  
+    .primaryButton,
+    .secondaryButton {
+      padding: 8px 14px;
+    }
+  
+    .justIconButton {
+      padding: 7px;
+      width: 36px;
+    }
+  
+    .label {
+      font-size: 12px;
+    white-space: nowrap;
+      font-weight: 300;
+    }
+  
+    .separator {
+      width: 4px
+    }
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+
+  .primaryButton,
+  .secondaryButton,
+  .justIconButton,
+  .shapelessButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--labelButton-height-small);
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    padding: 7px 12px;
+  }
+
+  .justIconButton {
+    padding: 7px;
+    width: 36px;
+  }
+
+  .label {
+    font-size: 12px;
+    white-space: nowrap;
+    font-weight: 200;
+  }
+
+  .separator {
+    width: 3px
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .primaryButton,
+  .secondaryButton,
+  .justIconButton,
+  .shapelessButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--labelButton-height-very-small);
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    padding: 4px 8px;
+  }
+
+  .justIconButton {
+    padding: 7px;
+    width: 25px;
+  }
+
+  .label {
+    font-size: 12px;
+    white-space: nowrap;
+    font-weight: 100;
+  }
+
+  .separator {
+    width: 2px
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Modal styles */
+
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: var(--grey-100);
+  padding: 24px;
+  border-radius: var(--border-radius);
+  position: relative;
+  text-align: left;
+  width: 364px;
+}
+
+
+.buttonHolder {
+  width: stretch;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 24px;
+}
+
+/* InputField styles */
+
+.inputField {
+  margin-bottom: 22px;
+}
+
+@media (max-width: 1024px) {
+    .modalContent {
+      background: var(--grey-100);
+      padding: 24px;
+      border-radius: var(--border-radius);
+      position: relative;
+      text-align: left;
+      width: 340px;
+    }
+  
+  
+    .buttonHolder {
+      width: stretch;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-top: 20px;
+    }
+
+      /* InputField styles */
+  
+      .inputField {
+        margin-bottom: 22px;
+      }
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    background: var(--grey-100);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    position: relative;
+    text-align: left;
+    width: 340px;
+  }
+
+
+  .buttonHolder {
+    width: stretch;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 18px;
+  }
+
+    /* InputField styles */
+  
+    .inputField {
+      margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    background: var(--grey-100);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    position: relative;
+    text-align: left;
+    width: 340px;
+  }
+
+
+  .buttonHolder {
+    width: stretch;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 14px;
+  }
+    /* InputField styles */
+  
+    .inputField {
+      margin-bottom: 12px;
+    }
+}
+
+
+
+/* ProfileSelector styles */
+
+.picture {
+  width: 88px;
+  height: 88px;
+  border-radius: 1000px;
+  border: 1px solid var(--grey-70);
+  margin-right: 16px;
+}
+
+.profileSelectorHolder {
+  width: stretch;
+  display: flex;
+  align-items: center;
+    /* Vertically center the content */
+  justify-content: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1024px) {
+  .picture {
+      width: 80px;
+      height: 80px;
+      border-radius: 1000px;
+      border: 1px solid var(--grey-70);
+      margin-right: 14px;
+    }
+  
+    .profileSelectorHolder {
+      width: stretch;
+      display: flex;
+      align-items: center;
+      /* Vertically center the content */
+      justify-content: left;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+  .picture {
+    width: 76px;
+    height: 76px;
+    border-radius: 1000px;
+    border: 1px solid var(--grey-70);
+    margin-right: 14px;
+  }
+
+  .profileSelectorHolder {
+    width: stretch;
+    display: flex;
+    align-items: center;
+    /* Vertically center the content */
+    justify-content: left;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .picture {
+    width: 68px;
+    height: 68px;
+    border-radius: 1000px;
+    border: 1px solid var(--grey-70);
+    margin-right: 10px;
+  }
+
+  .profileSelectorHolder {
+    width: stretch;
+    display: flex;
+    align-items: center;
+    /* Vertically center the content */
+    justify-content: left;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+/* ContactListItems styles */
+
+.contactHolder {
+  width: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contactPicture {
+  width: 40px;
+  height: 40px;
+  border-radius: 1000px;
+}
+
+.contactElement {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.contactChild {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 16px;
+  height: stretch;
+}
+
+.actionsHolder {
+  display: none;
+
+}
+
+.contactHolder:hover .actionsHolder, .contactHolder:focus-within .actionsHolder  {
+  display: flex;
+    align-items: center;
+      justify-content: flex-end;
+}
+
+@media (max-width: 1024px) {
+  
+    .contactPicture {
+      width: 40px;
+      height: 40px;
+      border-radius: 1000px;
+    }
+  
+    .contactElement {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+    }
+  
+    .contactChild {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      margin-left: 12px;
+      height: stretch;
+    }
+}
+
+@media (max-width: 768px) {
+
+  .contactPicture {
+    width: 36px;
+    height: 36px;
+    border-radius: 1000px;
+  }
+
+  .contactElement {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .contactChild {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 12px;
+    height: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .contactPicture {
+    width: 32px;
+    height: 32px;
+    border-radius: 1000px;
+  }
+
+  .contactElement {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .contactChild {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 10px;
+    height: stretch;
+  }
+}
+
+
+/* DropdownMenu styles */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  display: flex;
+  flex-direction: column;
+  position:absolute;
+  top: calc(var(--labelButton-height) / 2 + 8px);
+  width: 180px;
+  background-color: var(--grey-80);
+  border-radius: var(--border-radius) !important;
+  overflow: hidden;
+}
+
+.dropdownButton {
+  padding: 10px 12px;
+  justify-content: start;
+}
+
+
+
+
+@media (max-width: 1024px) {
+
+  
+    .dropdownContent {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: calc(var(--labelButton-height-medium) / 2 + 6px);
+      width: 130px;
+      background-color: var(--grey-80);
+      border-radius: var(--border-radius) !important;
+      overflow: hidden;
+    }
+  
+    .dropdownButton {
+      padding: 10px 12px;
+      justify-content: start;
+    }
+  
+
+}
+
+@media (max-width: 768px) {
+
+
+  .dropdownContent {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: calc(var(--labelButton-height-medium) / 2 + 3px);
+    width: 115px;
+    background-color: var(--grey-80);
+    border-radius: var(--border-radius) !important;
+    overflow: hidden;
+  }
+
+  .dropdownButton {
+    padding: 8px 10px;
+    justify-content: start;
+  }
+}
+
+@media (max-width: 480px) {
+
+
+  .dropdownContent {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: calc(var(--labelButton-height-medium) / 2);
+    width: 90px;
+    background-color: var(--grey-80);
+    border-radius: var(--border-radius) !important;
+    overflow: hidden;
+  }
+
+  .dropdownButton {
+    padding: 8px 10px;
+    justify-content: start;
+  }
+}

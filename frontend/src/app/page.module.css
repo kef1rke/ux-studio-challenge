@@ -1,0 +1,14 @@
+.main {
+  display: flex;
+  justify-content: center;
+  /* Horizontally center */
+  align-items: center;
+  /* Vertically center */
+  height: 100vh;
+}
+
+.title {
+  font-size: 2.5rem;
+}
+
+
