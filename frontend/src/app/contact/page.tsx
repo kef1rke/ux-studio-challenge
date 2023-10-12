@@ -10,67 +10,67 @@ import { svgs } from "../components/svgs";
 import { Contact } from "../types";
 
 const Contact = () => {
-  const router = useRouter();
+    const router = useRouter();
 
-  const goBack = () => {
-    router.back();
-  };
+    const goBack = () => {
+        router.back();
+    };
 
-  const [contacts, setContacts] = useState<Contact | null>(null);
+    const [contacts, setContacts] = useState<Contact[] | null>(null);
 
-  async function loadContact() {
-    try {
-      const contactData = await fetchAllContacts();
-      setContacts(contactData);
-    } catch (error) {
-      console.error("Error fetching contact data:", error);
+    async function loadContact() {
+        try {
+            const contactData = await fetchAllContacts();
+            setContacts(contactData);
+        } catch (error) {
+            console.error("Error fetching contact data:", error);
+        }
     }
-  }
 
-  useEffect(() => {
-    loadContact();
-  }, []);
+    useEffect(() => {
+        loadContact();
+    }, []);
 
-  return (
-    <main className={styles.main}>
-      <div className={styles.gridContainer}>
-        <div className={styles.gridItem}></div>
-        <div className={styles.gridItem}></div>
-        <div className={styles.gridItem}></div>
+    return (
+        <main className={styles.main}>
+            <div className={styles.gridContainer}>
+                <div className={styles.gridItem}></div>
+                <div className={styles.gridItem}></div>
+                <div className={styles.gridItem}></div>
 
-        <div className={styles.gridItem}>
-          <LabelButton color="ghost" shape="justIcon" onClick={goBack}>
-            {svgs.backArrow}
-          </LabelButton>
-        </div>
-        <div className={styles.gridItem}>
-          <Nav loadContact={loadContact} />
-        </div>
-        <div className={styles.gridItem}>
-          <LabelButton color="ghost" shape="justIcon" icon={svgs.lightMode} />
-        </div>
-        <div className={styles.gridItem}></div>
-        <div className={styles.gridItem}>
-          {contacts ? (
-            Array.isArray(contacts) && contacts.length > 0 ? (
-              contacts.map((contact) => (
-                <ContactListItem
-                  loadContact={loadContact}
-                  contactData={contact}
-                  key={contact.id}
-                />
-              ))
-            ) : (
-              <p>No Contacts</p>
-            )
-          ) : (
-            <p>Loading...</p>
-          )}
-        </div>
-        <div className={styles.gridItem}></div>
-      </div>
-    </main>
-  );
+                <div className={styles.gridItem}>
+                    <LabelButton color="ghost" shape="justIcon" onClick={goBack}>
+                        {svgs.backArrow}
+                    </LabelButton>
+                </div>
+                <div className={styles.gridItem}>
+                    <Nav loadContact={loadContact} />
+                </div>
+                <div className={styles.gridItem}>
+                    <LabelButton color="ghost" shape="justIcon" icon={svgs.lightMode} />
+                </div>
+                <div className={styles.gridItem}></div>
+                <div className={styles.gridItem}>
+                    {contacts ? (
+                        Array.isArray(contacts) && contacts.length > 0 ? (
+                            contacts.map((contact) => (
+                                <ContactListItem
+                                    loadContact={loadContact}
+                                    contactData={contact}
+                                    key={contact.id}
+                                />
+                            ))
+                        ) : (
+                            <p>No Contacts</p>
+                        )
+                    ) : (
+                        <p>Loading...</p>
+                    )}
+                </div>
+                <div className={styles.gridItem}></div>
+            </div>
+        </main>
+    );
 };
 
 export default Contact;

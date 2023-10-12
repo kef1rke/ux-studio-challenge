@@ -7,105 +7,105 @@ import ModalForm from "./ModalForm";
 import { Contact } from "../types";
 
 interface CustomListItemProps {
-  contactData: Contact;
-  loadContact: () => void;
+    contactData: Contact;
+    loadContact: () => void;
 }
 
 const ContactListItem: React.FC<CustomListItemProps> = ({
-  contactData,
-  loadContact,
+    contactData,
+    loadContact,
 }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-    loadContact();
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        closeDropdown();
-      }
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
     };
 
-    if (isDropdownOpen) {
-      document.addEventListener("click", handleClickOutside);
-    } else {
-      document.removeEventListener("click", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
+    const closeDropdown = () => {
+        setIsDropdownOpen(false);
+        loadContact();
     };
-  }, [isDropdownOpen]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                closeDropdown();
+            }
+        };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    loadContact();
-  };
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+        if (isDropdownOpen) {
+            document.addEventListener("click", handleClickOutside);
+        } else {
+            document.removeEventListener("click", handleClickOutside);
+        }
 
-  return (
-    <div className={styles.contactHolder}>
-      <div className={styles.contactElement}>
-        <img
-          className={styles.contactPicture}
-          src={
-            contactData.picture ? contactData.picture : "/profiledefault.png"
-          }
-          alt="profile_picture"
-        />
-        <div className={styles.contactChild}>
-          <h3>{contactData.name}</h3>
-          <label>{contactData.phone}</label>
-        </div>
-      </div>
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, [isDropdownOpen]);
 
-      <div className={styles.actionsHolder}>
-        <LabelButton icon={svgs.mute} shape="justIcon" color="ghost" />
-        <LabelButton icon={svgs.call} shape="justIcon" color="ghost" />
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-        {isDropdownOpen && (
-          <div ref={dropdownRef}>
-            <DropdownMenu
-              contactData={contactData}
-              openModal={openModal}
-              closeDropdown={closeDropdown}
+    const closeModal = () => {
+        setIsModalOpen(false);
+        loadContact();
+    };
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    return (
+        <div className={styles.contactHolder}>
+            <div className={styles.contactElement}>
+                <img
+                    className={styles.contactPicture}
+                    src={
+                        contactData.picture ? contactData.picture : "/profiledefault.png"
+                    }
+                    alt="profile_picture"
+                />
+                <div className={styles.contactChild}>
+                    <h3>{contactData.name}</h3>
+                    <label>{contactData.phone}</label>
+                </div>
+            </div>
+
+            <div className={styles.actionsHolder}>
+                <LabelButton icon={svgs.mute} shape="justIcon" color="ghost" />
+                <LabelButton icon={svgs.call} shape="justIcon" color="ghost" />
+
+                {isDropdownOpen && (
+                    <div ref={dropdownRef}>
+                        <DropdownMenu
+                            contactData={contactData}
+                            openModal={openModal}
+                            closeDropdown={closeDropdown}
+                        />
+                    </div>
+                )}
+
+                <LabelButton
+                    icon={svgs.more}
+                    onClick={toggleDropdown}
+                    shape="justIcon"
+                    color="ghost"
+                    stayActive={isDropdownOpen}
+                />
+            </div>
+
+            <ModalForm
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                profileData={contactData}
+                title="Add contact"
+                type="edit"
             />
-          </div>
-        )}
-
-        <LabelButton
-          icon={svgs.more}
-          onClick={toggleDropdown}
-          shape="justIcon"
-          color="ghost"
-          stayActive={isDropdownOpen}
-        />
-      </div>
-
-      <ModalForm
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        profileData={contactData}
-        title="Add contact"
-        type="edit"
-      />
-    </div>
-  );
+        </div>
+    );
 };
 
 export default ContactListItem;

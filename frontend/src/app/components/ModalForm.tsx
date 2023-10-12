@@ -1,148 +1,163 @@
-﻿import React, { useState, FormEvent } from "react";
-import styles from "./components.module.css";
-import LabelButton from "./LabelButton";
+﻿// components/Form.tsx
+import React, { useState } from "react";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import InputField from "./InputField";
-import ProfileSelector from "./ProfileSelector";
-import { svgs } from "./svgs";
+import styles from "./components.module.css";
 import { addContact, updateContact } from "../api/DataFetcher";
+import ProfileSelector from "./ProfileSelector";
+import LabelButton from "./LabelButton";
 import { Contact } from "../types";
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  type: "add" | "edit";
-  profileData?: Contact;
+interface ModalFormProps {
+    isOpen: boolean;
+    onClose: () => void;
+    title: string;
+    type: "add" | "edit";
+    profileData?: Contact;
 }
 
-const ModalForm: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  type,
-  profileData,
+interface FormData {
+    name: string;
+    email: string;
+    phone: string;
+    picture: string | File | null;
+}
+
+const ModalForm: React.FC<ModalFormProps> = ({
+    isOpen,
+    onClose,
+    title,
+    type,
+    profileData,
 }) => {
-  if (!isOpen) {
-    return null;
-  }
+    if (!isOpen) {
+        return null;
+    }
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [isLoading, setisLoading] = useState(false);
 
-  const getFieldValue = (field: string, defaultValue: string) => {
-    const input = profileData ? profileData[field as keyof Contact] : null;
-    return input !== null && input !== undefined ? input : defaultValue;
-  };
+    const { control, handleSubmit } = useForm<FormData>({
+        defaultValues: {
+            name: profileData?.name || "",
+            email: profileData?.email || "",
+            phone: profileData?.phone || "",
+            picture: profileData?.picture || null,
+        },
+    });
 
-  const [formData, setFormData] = useState({
-    name: getFieldValue("name", ""),
-    email: getFieldValue("email", ""),
-    phone: getFieldValue("phone", ""),
-    picture: profileData?.picture ? profileData.picture : selectedFile ? URL.createObjectURL(selectedFile) : null ,
-  });
+    const onSubmit: SubmitHandler<FormData> = async (data) => {
+        setisLoading(true);
 
-  const handleDelete = () => {
-    // const { name, value } = event.target;
-    setSelectedFile(null);
-    setFormData(name => ({ ...name, picture: "" }));
-  };
+        const contactId = profileData?.id;
+        try {
+            const contactData = {
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                picture: data.picture,
+            };
+            const response = type == "edit" && contactId ? updateContact(contactId, contactData) : await addContact(contactData);
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const form = e.currentTarget as HTMLFormElement;
-
-    const contactData: any = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      picture: selectedFile || formData.picture,
+            if (response.success = true) {
+                setisLoading(false);
+                onClose();
+            }
+        } catch (error) {
+            console.error("Failed to add contact:", error);
+        }
     };
 
-    const contactId = profileData?.id;
+    return (
+        <div className={styles.modalBackdrop}
+            onClick={onClose}
+        >
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                <h2>{title}</h2>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Controller
+                        name="picture"
+                        control={control}
+                        render={({ field }) => (
 
-    if (contactData.name && contactData.email && contactData.phone) {
-      if (type === "add") {
-        try {
-          const addedContact = await addContact(contactData);
+                            <ProfileSelector
+                                onFileUpload={(file) => {
+                                    field.onChange(file)
+                                }}
+                                defaultValue={field.value}
+                            />
 
-          form.reset();
+                        )}
+                    />
+                    <Controller
 
-          onClose();
-        } catch (error) {
-          console.error("Error adding contact:", error);
-        }
-      }
-      if (type === "edit" && contactId) {
-        try {
-          const updatedContact = await updateContact(contactId, contactData);
-          form.reset();
-          onClose();
-        } catch (error) {
-          console.error("Error updating contact:", error);
-        }
-      }
-    }
-  };
+                        name="name"
+                        control={control}
+                        defaultValue=""
+                        render={({ field }) => (
+                            <InputField
+                                type="text"
+                                id="name"
+                                placeholder="Jamie Wright"
+                                label="Name"
+                                name="name"
+                                value={field.value}
+                                onChange={(e) => {
+                                    field.onChange(e);
+                                }}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="phone"
+                        control={control}
+                        defaultValue=""
+                        render={({ field }) => (
+                            <InputField
+                                type="text"
+                                id="phone"
+                                placeholder="+01 234 5678"
+                                label="Phone number"
+                                name="phone"
+                                value={field.value}
+                                onChange={(e) => {
+                                    const numericValue = e.target.value.replace(/[^\d\+]/g, '');
+                                    field.onChange(numericValue)
+                                }}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="email"
+                        control={control}
+                        defaultValue=""
+                        render={({ field }) => (
+                            <InputField
+                                type="text"
+                                id="email"
+                                placeholder="jamie.wright@mail.com"
+                                label="Email address"
+                                name="email"
+                                value={field.value}
+                                onChange={(e) => {
+                                    field.onChange(e);
+                                }}
+                            />
+                        )}
+                    />
 
-  return (
-    <div className={styles.modalBackdrop} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <h2>{title}</h2>
-
-        <form onSubmit={handleSubmit}>
-          <ProfileSelector
-            onFileUpload={(file) => setSelectedFile(file)}
-            defaultValue={formData.picture}
-            onDelete={handleDelete}
-          />
-          <InputField
-            label="Name"
-            id="name"
-            type="text"
-            placeholder="Jamie Wright"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Phone number"
-            id="phone"
-            type="text"
-            placeholder="+36306543214"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-          />
-          <InputField
-            label="Email address"
-            id="email"
-            type="email"
-            placeholder="jamie.wright@mail.com"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-          <div className={styles.buttonHolder}>
-            <LabelButton
-              customClass={styles.buttonWithMargin}
-              color="ghost"
-              onClick={onClose}
-              label="Cancel"
-            />
-            <LabelButton label="Done" type="submit" />
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+                    <div className={styles.buttonHolder}>
+                        <LabelButton
+                            customClass={styles.buttonWithMargin}
+                            color="ghost"
+                            onClick={onClose}
+                            label="Cancel"
+                        />
+                        <LabelButton label="Done" type="submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 };
-
 
 export default ModalForm;

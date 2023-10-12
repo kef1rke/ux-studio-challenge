@@ -1,63 +1,63 @@
 ﻿/* Define default styles for .nav */
 .nav {
-  height: 100vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .left {
-  flex: 1;
-  text-align: left;
+    flex: 1;
+    text-align: left;
 }
 
 .right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
 }
 
 .profile {
-  width: 24px;
-  height: 24px;
+    width: 24px;
+    height: 24px;
 }
 
 .child {
-  margin-left: 8px;
+    margin-left: 8px;
 }
 
 /* Define media queries for smaller screens */
 
 @media (max-width: 1024px) {
     .profile {
-      width: 24px;
-      height: 24px;
+        width: 24px;
+        height: 24px;
     }
-  
+
     .child {
-      margin-left: 6px;
+        margin-left: 6px;
     }
 }
 
 @media (max-width: 768px) {
-  .profile {
-    width: 20px;
-    height: 20px;
-  }
+    .profile {
+        width: 20px;
+        height: 20px;
+    }
 
-  .child {
-    margin-left: 5px;
-  }
+    .child {
+        margin-left: 5px;
+    }
 }
 
 @media (max-width: 480px) {
-  .profile {
-    width: 15px;
-    height: 15px;
-  }
+    .profile {
+        width: 15px;
+        height: 15px;
+    }
 
-  .child {
-    margin-left: 3px;
-  }
+    .child {
+        margin-left: 3px;
+    }
 }

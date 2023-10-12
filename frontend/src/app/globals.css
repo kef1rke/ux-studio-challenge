@@ -1,275 +1,273 @@
 :root {
-  --max-width: 1440px;
+    --max-width: 1440px;
 
-  --border: 2px solid #282828;
-  --font-mono: 'Glysa', 'LexendDeca-VariableFont_wght', monospace;
-  --border-radius: 8px;
+    --border: 2px solid #282828;
+    --font-mono: 'Glysa', 'LexendDeca-VariableFont_wght', monospace;
+    --border-radius: 8px;
 
-  --grey-100: #141414;
-  --grey-90: #191919;
-  --grey-80: #1e1e1e;
-  --grey-70: #232323;
-  --grey-60: #282828;
-  --grey-50: #2d2d2d;
-  --grey-40: #323232;
-  --grey-30: #373737;
-  --grey-20: #3c3c3c;
-  --grey-10: #414141;
+    --grey-100: #141414;
+    --grey-90: #191919;
+    --grey-80: #1e1e1e;
+    --grey-70: #232323;
+    --grey-60: #282828;
+    --grey-50: #2d2d2d;
+    --grey-40: #323232;
+    --grey-30: #373737;
+    --grey-20: #3c3c3c;
+    --grey-10: #414141;
 
-  --text-color: #ffffff;
+    --text-color: #ffffff;
 
-  --phone-max-width: 480px;
-  --tablet-max-width: 768px;
+    --phone-max-width: 480px;
+    --tablet-max-width: 768px;
 
-  --labelButton-height: 40px;
-  --labelButton-height-small: 32px;
-  --labelButton-height-medium: 36px;
-  --labelButton-height-very-small: 28px;
+    --labelButton-height: 40px;
+    --labelButton-height-small: 32px;
+    --labelButton-height-medium: 36px;
+    --labelButton-height-very-small: 28px;
 }
 
 @font-face {
-  font-family: 'Glysa';
-  src: url('/fonts/Glysa.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Glysa';
+    src: url('/fonts/Glysa.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'LexendDeca-VariableFont_wght';
-  src: url('/fonts/LexendDeca-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'LexendDeca-VariableFont_wght';
+    src: url('/fonts/LexendDeca-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 
 html,
 body {
-  overflow-x: hidden;
-  background: var(--grey-100);
-  max-height: 100vh;
-  color: var(--text-color);
+    overflow-x: hidden;
+    background: var(--grey-100);
+    max-height: 100vh;
+    color: var(--text-color);
 }
 
 
 
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 button {
-  background: var(--grey-60);
-  border: none;
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
-  cursor: pointer;
-  outline: none;
-  color: var(--text-color);
-  font-family: 'LexendDeca-VariableFont_wght';
+    background: var(--grey-60);
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    color: var(--text-color);
+    font-family: 'LexendDeca-VariableFont_wght';
 }
 
 button:hover {
-  background: var(--grey-50);
+    background: var(--grey-50);
 }
 
 button:active {
-  background: var(--grey-40);
+    background: var(--grey-40);
 }
 
 h1 {
-  font-size: 32px;
-  font-family: 'Glysa';
-  font-weight: 500;
-  letter-spacing: 0%;
-  line-height: 48px;
+    font-size: 32px;
+    font-family: 'Glysa';
+    font-weight: 500;
+    letter-spacing: 0%;
+    line-height: 48px;
 }
 
 h2 {
-  font-size: 24px;
-  font-family: 'Glysa';
-  font-weight: 500;
-  letter-spacing: 0%;
-  line-height: 40px;
+    font-size: 24px;
+    font-family: 'Glysa';
+    font-weight: 500;
+    letter-spacing: 0%;
+    line-height: 40px;
 }
 
 h3 {
-  font-size: 16px;
-  font-family: 'LexendDeca-VariableFont_wght';
-  font-weight: 400;
-  letter-spacing: 1%;
-  line-height: 24px;
+    font-size: 16px;
+    font-family: 'LexendDeca-VariableFont_wght';
+    font-weight: 400;
+    letter-spacing: 1%;
+    line-height: 24px;
 }
 
 input {
-  caret-color: var(--text-color);
-  height: 40px;
-  border-radius: var(--border-radius);
-  border: 1px solid var(--grey-60);
-  outline: none;
-  padding: 8px;
-  background-color: transparent;
-  width: stretch;
-  color: var(--text-color);
+    caret-color: var(--text-color);
+    height: 40px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--grey-60);
+    outline: none;
+    padding: 8px;
+    background-color: transparent;
+    width: stretch;
+    color: var(--text-color);
 }
 
 input:focus {
-  border: 1px solid var(--grey-10);
-  background-color: var(--grey-60);
+    border: 1px solid var(--grey-10);
+    background-color: var(--grey-60);
 }
 
 input::placeholder {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17.5px;
-  font-family: 'LexendDeca-VariableFont_wght';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17.5px;
+    font-family: 'LexendDeca-VariableFont_wght';
 }
 
 label {
-  font-family: "LexendDeca-VariableFont_wght";
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 1%;
-  color: #FFFFFF8F;
+    font-family: "LexendDeca-VariableFont_wght";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1%;
+    color: #FFFFFF8F;
 }
 
 @media (max-width: 1024px) {
 
-  /* Adjust the font size of h1 and h2 for smaller screens */
-  h1 {
-    font-size: 28px;
-    line-height: 40px;
-  }
+    /* Adjust the font size of h1 and h2 for smaller screens */
+    h1 {
+        font-size: 28px;
+        line-height: 40px;
+    }
 
-  h2 {
-    font-size: 22px;
-    line-height: 30px;
-  }
+    h2 {
+        font-size: 22px;
+        line-height: 30px;
+    }
 
     h3 {
-      font-size: 14px;
-      font-family: 'LexendDeca-VariableFont_wght';
-      font-weight: 300;
-      letter-spacing: 1%;
-      line-height: 20px;
+        font-size: 14px;
+        font-family: 'LexendDeca-VariableFont_wght';
+        font-weight: 300;
+        letter-spacing: 1%;
+        line-height: 20px;
     }
 
-  /* Adjust input height and padding for smaller screens */
+    /* Adjust input height and padding for smaller screens */
     input {
-      caret-color: var(--text-color);
-      height: 36px;
-      border-radius: var(--border-radius);
-      border: 1px solid var(--grey-60);
-      outline: none;
-      padding: 8px;
-      background-color: transparent;
-      width: stretch;
-      color: var(--text-color);
+        caret-color: var(--text-color);
+        height: 36px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--grey-60);
+        outline: none;
+        padding: 8px;
+        background-color: transparent;
+        width: stretch;
+        color: var(--text-color);
     }
 
-  /* Adjust label font size for smaller screens */
-  label {
-    font-size: 10px;
-    line-height: 14px;
-  }
+    /* Adjust label font size for smaller screens */
+    label {
+        font-size: 10px;
+        line-height: 14px;
+    }
 }
 
 @media (max-width: 768px) {
 
-  /* Adjust the font size of h1 and h2 for smaller screens */
-  h1 {
-    font-size: 20px;
-    line-height: 36px;
-  }
-
-  h2 {
-    font-size: 20px;
-    line-height: 32px;
-  }
-
-  h3 {
-    font-size: 14px;
-    font-family: 'LexendDeca-VariableFont_wght';
-    font-weight: 200;
-    letter-spacing: 1%;
-    line-height: 18px;
-  }
-
-  /* Adjust input height and padding for smaller screens */
-    input {
-      caret-color: var(--text-color);
-      height: 32px;
-      border-radius: var(--border-radius);
-      border: 1px solid var(--grey-60);
-      outline: none;
-      padding: 8px;
-      background-color: transparent;
-      width: stretch;
-      color: var(--text-color);
+    /* Adjust the font size of h1 and h2 for smaller screens */
+    h1 {
+        font-size: 20px;
+        line-height: 36px;
     }
 
-  input::placeholder {
-    font-size: 12px;
-    line-height: 15px;
-  }
+    h2 {
+        font-size: 20px;
+        line-height: 32px;
+    }
 
-  /* Adjust label font size for smaller screens */
-  label {
-    font-size: 10px;
-    line-height: 14px;
-  }
+    h3 {
+        font-size: 14px;
+        font-family: 'LexendDeca-VariableFont_wght';
+        font-weight: 200;
+        letter-spacing: 1%;
+        line-height: 18px;
+    }
+
+    /* Adjust input height and padding for smaller screens */
+    input {
+        caret-color: var(--text-color);
+        height: 32px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--grey-60);
+        outline: none;
+        padding: 8px;
+        background-color: transparent;
+        width: stretch;
+        color: var(--text-color);
+    }
+
+    input::placeholder {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    /* Adjust label font size for smaller screens */
+    label {
+        font-size: 10px;
+        line-height: 14px;
+    }
 }
 
 /* Add another media query for screens with a max-width of 480px */
 @media (max-width: 480px) {
 
-  /* Further adjust styles for even smaller screens */
-  h1 {
-    font-size: 18px;
-    line-height: 26px;
-  }
+    /* Further adjust styles for even smaller screens */
+    h1 {
+        font-size: 18px;
+        line-height: 26px;
+    }
 
-  h2 {
-    font-size: 16px;
-    line-height: 20px;
-  }
+    h2 {
+        font-size: 16px;
+        line-height: 20px;
+    }
 
-  h3 {
-    font-size: 12px;
-    font-family: 'LexendDeca-VariableFont_wght';
-    font-weight: 200;
-    letter-spacing: 1%;
-    line-height: 16px;
-  }
+    h3 {
+        font-size: 12px;
+        font-family: 'LexendDeca-VariableFont_wght';
+        font-weight: 200;
+        letter-spacing: 1%;
+        line-height: 16px;
+    }
 
     input {
-      caret-color: var(--text-color);
-      height: 32px;
-      border-radius: var(--border-radius);
-      border: 1px solid var(--grey-60);
-      outline: none;
-      padding: 8px;
-      background-color: transparent;
-      width: stretch;
-      color: var(--text-color);
+        caret-color: var(--text-color);
+        height: 32px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--grey-60);
+        outline: none;
+        padding: 8px;
+        background-color: transparent;
+        width: stretch;
+        color: var(--text-color);
     }
-  
-  input::placeholder {
-    font-size: 10px;
-    line-height: 12.5px;
-  }
 
-  label {
-    font-size: 8px;
-    line-height: 10px;
-  }
+    input::placeholder {
+        font-size: 10px;
+        line-height: 12.5px;
+    }
+
+    label {
+        font-size: 8px;
+        line-height: 10px;
+    }
 }
-
-
