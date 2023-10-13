@@ -152,7 +152,7 @@ const ModalForm: React.FC<ModalFormProps> = ({
                             onClick={onClose}
                             label="Cancel"
                         />
-                        <LabelButton label="Done" type="submit" />
+                        <LabelButton label="Done" isLoading={isLoading} type="submit" />
                     </div>
                 </form>
             </div>

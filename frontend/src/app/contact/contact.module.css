@@ -38,6 +38,19 @@
 
 }
 
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+}
+
 @media (max-width: 1024px) {
     .gridContainer {
         display: grid;

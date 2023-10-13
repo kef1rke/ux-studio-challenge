@@ -80,6 +80,14 @@
     margin-right: 8px;
 }
 
+/* LabelButton Spinner */
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+}
+
 @media (max-width: 1024px) {
 
     .primaryButton,

@@ -8,6 +8,7 @@ import ContactListItem from "../components/ContactListItem";
 import { fetchAllContacts, addContact } from "../api/DataFetcher";
 import { svgs } from "../components/svgs";
 import { Contact } from "../types";
+import Spinner from "../components/loader/Spinner";
 
 const Contact = () => {
     const router = useRouter();
@@ -64,7 +65,9 @@ const Contact = () => {
                             <p>No Contacts</p>
                         )
                     ) : (
-                        <p>Loading...</p>
+                        <div className={styles.spinnerContainer}>
+                            <Spinner customClass={styles.spinner} />
+                        </div>
                     )}
                 </div>
                 <div className={styles.gridItem}></div>
